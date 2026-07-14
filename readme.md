@@ -1,4 +1,4 @@
-# NOVLPD01-MAC
+# (Unofficial) Launchpad Mk1 Driver for Mac
 
 > [!NOTE]
 > This is an App which acts as a driver for the Novation Launchpad Mk1 (the first ever Launchpad from 2009).
