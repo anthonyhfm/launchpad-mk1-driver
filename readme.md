@@ -10,3 +10,11 @@
 The Launchpad Mk1 does not classify as a USB-MIDI Device. It uses proprietary messages sent from the host which uses the official *Novation USB Driver*. 
 
 The official Novation USB Driver does not support modern macOS, which is why I build this open-source driver-app instead. Its fully native to *Apple-Silicon* and is running silently in the background.
+
+## What does it do?
+
+This App creates a virtual midi port using Apple's official CoreMIDI API and simply translates MIDI Messages over to the Launchpad Mk1's proprietary usb protocol. 
+
+## Installation Guide
+
+... coming soon
