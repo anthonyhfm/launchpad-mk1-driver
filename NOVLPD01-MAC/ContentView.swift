@@ -8,15 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    let connectedLaunchpadCount: Int
+    let connectionStatus: LaunchpadConnectionStatus
 
     var body: some View {
-        Text("\(connectedLaunchpadCount) Launchpads Connected")
+        Text("\(connectionStatus.connectedLaunchpadCount) \(connectionStatus.connectedLaunchpadCount == 1 ? "Launchpad" : "Launchpads") Connected")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-}
-
-#Preview {
-    ContentView(connectedLaunchpadCount: 0)
-        .frame(width: 200, height: 200)
 }

@@ -17,10 +17,15 @@ struct NOVLPD01_MACApp: App {
 
 final class MenuBarController: NSObject, NSApplicationDelegate {
     private let popover = NSPopover()
+    private let usbRepository = USBRepository()
+    private lazy var launchpadRepository = LaunchpadRepository(usbRepository: usbRepository)
+    private lazy var connectionStatus = LaunchpadConnectionStatus(repository: launchpadRepository)
     private var statusItem: NSStatusItem?
-    private var connectedLaunchpadCount = 0
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        _ = connectionStatus
+        usbRepository.start()
+
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         guard let button = statusItem.button else { return }
 
@@ -34,9 +39,13 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
         popover.behavior = .transient
         popover.contentSize = NSSize(width: 200, height: 200)
         popover.contentViewController = NSHostingController(
-            rootView: ContentView(connectedLaunchpadCount: connectedLaunchpadCount)
+            rootView: ContentView(connectionStatus: connectionStatus)
                 .frame(width: 200, height: 200)
         )
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        usbRepository.stop()
     }
 
     @objc private func togglePopover(_ sender: Any?) {
