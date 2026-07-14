@@ -8,17 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    let connectedLaunchpadCount: Int
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        Text("\(connectedLaunchpadCount) Launchpads Connected")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(connectedLaunchpadCount: 0)
+        .frame(width: 200, height: 200)
 }
