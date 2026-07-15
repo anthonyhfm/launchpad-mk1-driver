@@ -1,6 +1,6 @@
 import Foundation
 
-struct LaunchpadDevice: Identifiable, Hashable, Sendable {
+nonisolated struct LaunchpadDevice: Identifiable, Hashable, Sendable {
     static let vendorID: UInt16 = 0x1235
     static let productID: UInt16 = 0x000e
 

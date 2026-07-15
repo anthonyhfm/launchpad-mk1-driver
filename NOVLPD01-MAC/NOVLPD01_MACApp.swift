@@ -20,10 +20,12 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
     private let usbRepository = USBRepository()
     private lazy var launchpadRepository = LaunchpadRepository(usbRepository: usbRepository)
     private lazy var connectionStatus = LaunchpadConnectionStatus(repository: launchpadRepository)
+    private lazy var sessionManager = LaunchpadSessionManager(repository: launchpadRepository)
     private var statusItem: NSStatusItem?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         _ = connectionStatus
+        _ = sessionManager
         usbRepository.start()
 
         let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
@@ -45,6 +47,7 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ notification: Notification) {
+        sessionManager.stop()
         usbRepository.stop()
     }
 
