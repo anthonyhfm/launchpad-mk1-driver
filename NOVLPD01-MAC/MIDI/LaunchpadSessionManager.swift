@@ -7,6 +7,7 @@ final class LaunchpadSessionManager {
     private var observationTask: Task<Void, Never>?
     private var sessions: [UInt64: LaunchpadSession] = [:]
     private var assignedNumbers: [UInt64: Int] = [:]
+    private(set) var isRunning = false
 
     init(repository: LaunchpadRepository) {
         self.repository = repository
@@ -18,6 +19,12 @@ final class LaunchpadSessionManager {
             print("[MIDI] Could not create CoreMIDI client: \(error.localizedDescription)")
         }
 
+    }
+
+    func start() {
+        guard !isRunning else { return }
+        isRunning = true
+
         observationTask = Task { [weak self, repository] in
             for await launchpads in repository.launchpadUpdates() {
                 guard let self else { return }
@@ -27,6 +34,8 @@ final class LaunchpadSessionManager {
     }
 
     func stop() {
+        guard isRunning || !sessions.isEmpty else { return }
+        isRunning = false
         observationTask?.cancel()
         observationTask = nil
 

@@ -24,6 +24,10 @@ final class USBRepository {
 
     func stop() {
         monitor.stop()
+    }
+
+    func shutdown() {
+        stop()
         continuations.values.forEach { $0.finish() }
         continuations.removeAll()
     }
