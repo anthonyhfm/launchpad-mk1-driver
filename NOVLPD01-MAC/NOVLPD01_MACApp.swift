@@ -42,7 +42,7 @@ final class MenuBarController: NSObject, NSApplicationDelegate {
         popover.contentSize = NSSize(width: 200, height: 200)
         popover.contentViewController = NSHostingController(
             rootView: ContentView(connectionStatus: connectionStatus)
-                .frame(width: 200, height: 200)
+                .frame(width: 200, height: 50)
         )
     }
 
