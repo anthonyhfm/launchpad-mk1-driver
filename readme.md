@@ -44,6 +44,19 @@ Here is how the application interface looks in your macOS menu bar:
 5. Launch your preferred DAW (e.g., Ableton Live).
 6. In your DAW's MIDI settings, you will see `Launchpad Mk1` listed as an input and output port. Enable Track and Remote as needed.
 
+> [!IMPORTANT]
+> **macOS Security & Gatekeeper Warning:**
+> Since this application is not signed with a paid Apple Developer Account and notarized by Apple, macOS will show a warning when you open the prebuilt application for the first time (*"cannot be opened because the developer cannot be verified"*).
+>
+> To bypass this warning:
+> 1. **Right-click** (or Control-click) `NOVLPD01-MAC.app` in Finder and select **Open**.
+> 2. Click **Open** in the dialog box that appears.
+> 3. Alternatively, open **System Settings > Privacy & Security**, scroll down to the security section, and click **Open Anyway**.
+> 4. You can also run the following command in Terminal to remove the quarantine flag:
+>    ```bash
+>    xattr -d com.apple.quarantine /Applications/NOVLPD01-MAC.app
+>    ```
+
 ## Technical Details
 
 - **USB Interface**: Communicates directly with the Launchpad Mk1 hardware over USB (`Vendor ID: 0x1235`, `Product ID: 0x000E`) using Apple's standard USB communication libraries.
@@ -61,6 +74,20 @@ Here is how the application interface looks in your macOS menu bar:
 3. Select the `NOVLPD01-MAC` scheme.
 4. Build the project using `Product > Build` (or `Cmd + B`), or run it directly using `Product > Run` (or `Cmd + R`).
 5. To export a standalone app, select `Product > Archive` and distribute the App.
+
+### Creating a Release Package
+
+To quickly compile a production build and package it into a zip archive for distribution (e.g., GitHub Releases), run the provided release script:
+
+```bash
+./make-release.sh
+```
+
+This script will:
+1. Clean up any previous build outputs.
+2. Build the app in the `Release` configuration.
+3. Compress the resulting `NOVLPD01-MAC.app` using `ditto` to preserve macOS-specific code-signing metadata.
+4. Output a clean `NOVLPD01-MAC.zip` ready for distribution.
 
 ## License & Disclaimer
 

@@ -1,0 +1,17 @@
+# Xcode
+# =========================
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+
+# macOS
+# =========================
+.DS_Store
+
+# Releases
+# =========================
+*.zip
+make-release.sh
